@@ -1,87 +1,116 @@
 body {
-  background-color: #1a1a1a;
-  color: #00ff00;
-  font-family: 'Courier New', Courier, monospace;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-  box-sizing: border-box;
+    background-color: #f0f2f5;
+    color: #333333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 h1 {
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 0 5px #00ff00;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 3px solid #007bff;
+    padding-bottom: 10px;
 }
 
-h2 {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 30px;
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 320px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-#enteredValue,
-#conversionType {
-  background-color: #111;
-  color: #00ff00;
-  border: 2px solid #00ff00;
-  border-radius: 0;
-  padding: 12px;
-  font-family: inherit;
-  font-size: 1rem;
-  width: 100%;
-  max-width: 350px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-#conversionType {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="%2300ff00" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 20px;
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 
-#convertFunction {
-  width: 100%;
-  max-width: 350px;
-  padding: 15px;
-  background-color: #00ff00;
-  color: #1a1a1a;
-  border: none;
-  border-radius: 0;
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.1s ease-in;
+button:active {
+    transform: scale(0.98);
 }
 
-#convertFunction:hover {
-  background-color: #33ff33;
+.back-btn {
+    background-color: #6c757d;
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    align-self: flex-start;
+    margin-left: 0;
+    box-shadow: none;
 }
 
-#convertFunction:active {
-  background-color: #00cc00;
-  transform: translateY(2px);
+.back-btn:hover {
+    background-color: #5a6268;
+    box-shadow: none;
 }
 
-#resultValue {
-  background-color: #000;
-  border: 2px solid #00ff00;
-  padding: 20px;
-  min-height: 2em;
-  width: 100%;
-  max-width: 350px;
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 1.1rem;
-  word-wrap: break-word;
-  box-sizing: border-box;
+.timetable-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    background-color: transparent; /* Or #f0f2f5 to match body */
+    color: #888; /* Light gray so it's not distracting */
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    pointer-events: none; /* Allows clicking through it if it overlaps something */
+}
+
+.footer strong {
+  color: #007bff;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    pointer-events: auto;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    color: #0056b3;
 }

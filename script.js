@@ -1,28 +1,23 @@
-function convertIt(){
+function goHome() {
+    window.location.href = "index.html";
+}
 
-  const valueToConvert = parseFloat(document.getElementById("enteredValue").value);
-  
-  const conversionType = document.getElementById("conversionType").value;
-  
-  
-  const resultElement = document.getElementById("resultValue");
-  
-  let result; 
+function openSyllabus() {
+    window.location.href = "syllabus.html";
+}
 
-  if (isNaN(valueToConvert)) {
-    resultElement.innerHTML = "Please enter a valid number.";
-    return; 
-  }
+function openTimeTable() {
+    window.location.href = "timetable.html";
+}
 
-  if (conversionType === "milesToKM") {
-    result = valueToConvert * 1.60934;
-    resultElement.innerHTML = valueToConvert + " miles is " + result.toFixed(2) + " kilometers.";
-  
-  } else if (conversionType === "KMToMiles") {
-    result = valueToConvert / 1.60934;
-    resultElement.innerHTML = valueToConvert + " km is " + result.toFixed(2) + " miles.";
-  
-  } else {
-    resultElement.innerHTML = "Please select a conversion type.";
-  }
+function downloadcl() {
+    window.open("syllabus/BCAS4CyberLawsSyllabus.pdf", "_blank");
+}
+
+function downloaddbms() {
+    window.open("syllabus/BCAS4DataBaseManagementSystem.pdf", "_blank");
+}
+
+function downloadse() {
+    window.open("syllabus/BCAS4SoftwareEngineeringSyllabus.pdf", "_blank");
 }
