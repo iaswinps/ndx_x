@@ -1,164 +1,108 @@
-/* --- GLOBAL SETTINGS --- */
-// Default Total Working Days if nothing is saved
-const DEFAULT_TOTAL_DAYS = 50; 
-
-// Default Student List (Roll 1-13)
-const defaultStudents = [
-    { roll: 1, name: "Aswin", present: 6 },
-    { roll: 2, name: "Anas", present: 32 },
-    { roll: 3, name: "Adithyan", present: 3 },
-    { roll: 4, name: "Abhishek", present: 4 },
-    { roll: 5, name: "Nihad", present: 0 },
-    { roll: 6, name: "Shameem", present: 0 },
-    { roll: 7, name: "Faiz", present: 0 },
-    { roll: 8, name: "Sandeep", present: 0 },
-    { roll: 9, name: "Sahada", present: 4 },
-    { roll: 10, name: "Niya", present: 4 },
-    { roll: 11, name: "Anjana", present: 3 },
-    { roll: 12, name: "Meera", present: 3 },
-    { roll: 13, name: "Srinisha", present: 3 }
-];
-
-/* --- NAVIGATION --- */
 function goHome() { window.location.href = "index.html"; }
 function openSyllabus() { window.location.href = "syllabus.html"; }
 function openNotes() { window.location.href = "notes.html"; }
 function openTimeTable() { window.location.href = "timetable.html"; }
 function openAttendance() { window.location.href = "attendance.html"; }
-function openUpdate() { window.location.href = "update.html"; }
 
-/* --- DATA MANAGEMENT (LOCAL STORAGE) --- */
-function initData() {
-    // Check if data exists in browser memory
-    if (!localStorage.getItem('classData')) {
-        const initialData = {
-            totalDays: DEFAULT_TOTAL_DAYS,
-            students: defaultStudents
-        };
-        localStorage.setItem('classData', JSON.stringify(initialData));
+let myTotal = 0;
+let myPresent = 0;
+
+function initPersonalData() {
+    const savedTotal = localStorage.getItem('myTotalDays');
+    const savedPresent = localStorage.getItem('myPresentDays');
+
+    if (savedTotal) myTotal = parseFloat(savedTotal);
+    if (savedPresent) myPresent = parseFloat(savedPresent);
+
+    updateUI();
+}
+
+function updateTotal(amount) {
+    myTotal += amount;
+    if (myTotal < 0) myTotal = 0;
+    saveAndRender();
+}
+
+function updatePresent(amount) {
+    myPresent += amount;
+    if (myPresent < 0) myPresent = 0;
+    if (myPresent > myTotal) myPresent = myTotal;
+    saveAndRender();
+}
+
+function saveAndRender() {
+    localStorage.setItem('myTotalDays', myTotal);
+    localStorage.setItem('myPresentDays', myPresent);
+    updateUI();
+}
+
+function updateUI() {
+    document.getElementById('displayTotal').innerText = myTotal;
+    document.getElementById('displayPresent').innerText = myPresent;
+
+    let leaves = myTotal - myPresent;
+    let percent = myTotal > 0 ? ((myPresent / myTotal) * 100).toFixed(1) : 0;
+
+    document.getElementById('leavesText').innerText = leaves + " Days";
+    document.getElementById('percentText').innerText = percent + "%";
+
+    let leavesWidth = (leaves / 20) * 100;
+    if (leavesWidth > 100) leavesWidth = 100;
+
+    document.getElementById('leavesBar').style.width = leavesWidth + "%";
+    document.getElementById('percentBar').style.width = percent + "%";
+
+    const percentBar = document.getElementById('percentBar');
+    const statusMsg = document.getElementById('statusMessage');
+
+    if (myTotal === 0) {
+        statusMsg.innerText = "Start adding days.";
+        statusMsg.style.color = "#aaa";
+    } else if (percent >= 75) {
+        percentBar.className = "progress-fill fill-attend";
+        statusMsg.innerText = "Safe Zone! 🔥 ";
+        statusMsg.style.color = "#38ef7d";
+    } else {
+        percentBar.className = "progress-fill fill-attend low";
+        statusMsg.innerText = "Below 75% ⚠️ Korav aanallo";
+        statusMsg.style.color = "#f59e0b";
     }
 }
 
-function getData() {
-    initData();
-    return JSON.parse(localStorage.getItem('classData'));
+let currentFilePath = "";
+let currentFileName = "";
+
+function openOptions(path, name) {
+    currentFilePath = path;
+    currentFileName = name;
+    const modal = document.getElementById('optionModal');
+    if(modal) {
+        modal.style.display = 'flex';
+        if(document.getElementById('selectedSubjectText')) {
+            document.getElementById('selectedSubjectText').innerText = name.replace('.pdf', '').replace(/_/g, ' ');
+        }
+    }
 }
 
-function saveData(data) {
-    localStorage.setItem('classData', JSON.stringify(data));
+function closeOptions() {
+    const modal = document.getElementById('optionModal');
+    if(modal) modal.style.display = 'none';
 }
 
-/* --- ADMIN PANEL LOGIC (update.html) --- */
-function renderAdminPanel() {
-    const data = getData();
-    const container = document.getElementById("admin-list");
-    const totalDisplay = document.getElementById("totalDaysDisplay");
-    
-    if (!container) return;
-
-    // Update Total Days Number
-    totalDisplay.innerText = data.totalDays;
-
-    container.innerHTML = "";
-
-    data.students.forEach((student, index) => {
-        let card = `
-            <div class="student-card" style="flex-direction: column; align-items: flex-start;">
-                <div class="student-header" style="width: 100%;">
-                    <span class="student-name">${student.name}</span>
-                    <span class="student-roll" style="background: rgba(255,255,255,0.1); color: white;">Present: ${student.present}</span>
-                </div>
-                
-                <div style="display: flex; gap: 5px; width: 100%; justify-content: space-between;">
-                    <div style="display: flex; gap: 5px;">
-                        <button onclick="updateStudent(${index}, -1)" class="mini-btn red">-1</button>
-                        <button onclick="updateStudent(${index}, -0.5)" class="mini-btn red">-0.5</button>
-                    </div>
-                    <div style="display: flex; gap: 5px;">
-                        <button onclick="updateStudent(${index}, 0.5)" class="mini-btn green">+0.5</button>
-                        <button onclick="updateStudent(${index}, 1)" class="mini-btn green">+1</button>
-                    </div>
-                </div>
-            </div>
-        `;
-        container.innerHTML += card;
-    });
+function viewCurrentFile() {
+    if(currentFilePath) {
+        window.open(currentFilePath, '_blank');
+        closeOptions();
+    }
 }
 
-function changeTotalDays(amount) {
-    const data = getData();
-    data.totalDays += amount;
-    if (data.totalDays < 1) data.totalDays = 1; // Prevent 0 or negative
-    saveData(data);
-    renderAdminPanel(); // Refresh screen
+function downloadCurrentFile() {
+    if(currentFilePath) {
+        triggerDownload(currentFilePath, currentFileName);
+        closeOptions();
+    }
 }
 
-function updateStudent(index, amount) {
-    const data = getData();
-    data.students[index].present += amount;
-    if (data.students[index].present < 0) data.students[index].present = 0;
-    saveData(data);
-    renderAdminPanel(); // Refresh screen
-}
-
-/* --- ATTENDANCE PAGE LOGIC (attendance.html) --- */
-function loadAttendance() {
-    const container = document.getElementById("attendance-wrapper");
-    if (!container) return;
-
-    const data = getData();
-    const totalDays = data.totalDays;
-
-    // Update Header info
-    document.querySelector('h1').innerHTML = `ATTENDANCE <span style="font-size: 1rem; display:block; color: #aaa;">(Total Days: ${totalDays})</span>`;
-
-    container.innerHTML = "";
-
-    data.students.forEach(student => {
-        // Calculate Numbers
-        let leaves = totalDays - student.present;
-        let percent = ((student.present / totalDays) * 100).toFixed(1); // 1 decimal place
-
-        // Color Logic
-        let attendColor = percent >= 75 ? "fill-attend" : "fill-attend low";
-        
-        // Leaves bar width (Max 20 for scale)
-        let leavesWidth = (leaves / 20) * 100; 
-        if (leavesWidth > 100) leavesWidth = 100;
-
-        let card = `
-            <div class="student-card">
-                <div class="student-header">
-                    <span class="student-name">${student.name}</span>
-                    <span class="student-roll">Roll: ${student.roll}</span>
-                </div>
-
-                <div class="bar-group">
-                    <div class="bar-label">
-                        <span>Leaves Taken</span>
-                        <span>${leaves} Days</span>
-                    </div>
-                    <div class="progress-track">
-                        <div class="progress-fill fill-leaves" style="width: ${leavesWidth}%"></div>
-                    </div>
-                </div>
-
-                <div class="bar-group">
-                    <div class="bar-label">
-                        <span>Attendance (${student.present}/${totalDays})</span>
-                        <span>${percent}%</span>
-                    </div>
-                    <div class="progress-track">
-                        <div class="progress-fill ${attendColor}" style="width: ${percent}%"></div>
-                    </div>
-                </div>
-            </div>
-        `;
-        container.innerHTML += card;
-    });
-}
-
-/* --- DOWNLOAD FUNCTIONS --- */
 function triggerDownload(path, filename) {
     const link = document.createElement('a');
     link.href = path;
@@ -167,9 +111,79 @@ function triggerDownload(path, filename) {
     link.click();
     document.body.removeChild(link);
 }
-function downloadcl() { triggerDownload("syllabus/BCAS4CyberLawsSyllabus.pdf", "CyberLaws_Syllabus.pdf"); }
-function downloaddbms() { triggerDownload("syllabus/BCAS4DataBaseManagementSystem.pdf", "DBMS_Syllabus.pdf"); }
-function downloadse() { triggerDownload("syllabus/BCAS4SoftwareEngineeringSyllabus.pdf", "SoftwareEng_Syllabus.pdf"); }
-function downloadNotesSE() { triggerDownload("notes/se_notes.pdf", "SE_Notes.pdf"); }
-function downloadNotesDBMS() { triggerDownload("notes/dbms_notes.pdf", "DBMS_Notes.pdf"); }
-function downloadNotesCL() { triggerDownload("notes/cl_notes.pdf", "CL_Notes.pdf"); }
+
+function checkTimeTable() {
+    const now = new Date();
+    const day = now.getDay(); 
+    const currentMinutes = (now.getHours() * 60) + now.getMinutes();
+    
+    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    
+    const clockEl = document.getElementById('digitalClock');
+    const dayTextEl = document.getElementById('currentDayText');
+    
+    if(clockEl) clockEl.innerText = timeString;
+    if(dayTextEl) dayTextEl.innerText = dayNames[day];
+
+    document.querySelectorAll('.active-pulse').forEach(el => el.classList.remove('active-pulse'));
+    document.querySelectorAll('.active-day-row').forEach(el => el.classList.remove('active-day-row'));
+
+    if (day === 0 || day === 6) {
+        updateStatus("Weekend", "free");
+        return;
+    }
+
+    const dayRow = document.getElementById(`row-${day}`);
+    if (dayRow) dayRow.classList.add('active-day-row');
+
+    let period = 0;
+    let statusText = "Free Time";
+    let statusType = "free"; 
+
+    if (day >= 1 && day <= 4) {
+        if (currentMinutes >= 570 && currentMinutes < 630) period = 1;       
+        else if (currentMinutes >= 630 && currentMinutes < 685) period = 2;  
+        else if (currentMinutes >= 685 && currentMinutes < 695) { statusText = "Interval"; statusType = "break"; }
+        else if (currentMinutes >= 695 && currentMinutes < 750) period = 3;  
+        else if (currentMinutes >= 750 && currentMinutes < 810) { statusText = "Lunch Break"; statusType = "break"; } 
+        else if (currentMinutes >= 810 && currentMinutes < 860) period = 4;  
+        else if (currentMinutes >= 860 && currentMinutes < 910) period = 5;  
+        else if (currentMinutes >= 910) { statusText = "Classes Over"; statusType = "free"; }
+    }
+    else if (day === 5) {
+        if (currentMinutes >= 570 && currentMinutes < 630) period = 1;       
+        else if (currentMinutes >= 630 && currentMinutes < 685) period = 2;  
+        else if (currentMinutes >= 685 && currentMinutes < 695) { statusText = "Interval"; statusType = "break"; }
+        else if (currentMinutes >= 695 && currentMinutes < 750) period = 3;  
+        else if (currentMinutes >= 750 && currentMinutes < 840) { statusText = "Friday Lunch"; statusType = "break"; } 
+        else if (currentMinutes >= 840 && currentMinutes < 875) period = 4;  
+        else if (currentMinutes >= 875 && currentMinutes < 910) period = 5;  
+        else if (currentMinutes >= 910) { statusText = "Classes Over"; statusType = "free"; }
+    }
+
+    if (period > 0) {
+        const cellId = `d${day}-h${period}`;
+        const cell = document.getElementById(cellId);
+        if (cell) {
+            cell.classList.add('active-pulse');
+            statusText = cell.innerText + " (Ongoing)";
+            statusType = "active";
+        }
+    }
+
+    updateStatus(statusText, statusType);
+}
+
+function updateStatus(text, type) {
+    const statusEl = document.getElementById('currentStatus');
+    if (!statusEl) return;
+    
+    statusEl.innerText = text;
+    
+    statusEl.classList.remove('status-active', 'status-break', 'status-free');
+    
+    if (type === 'active') statusEl.classList.add('status-active');
+    if (type === 'break') statusEl.classList.add('status-break');
+    if (type === 'free') statusEl.classList.add('status-free');
+}

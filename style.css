@@ -1,9 +1,7 @@
-/* --- 1. Deep Dark Background --- */
 body {
-    background-color: #050505; /* Almost pure black */
+    background-color: #050505;
     color: #e0e0e0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,8 +14,6 @@ body {
     box-sizing: border-box;
 }
 
-/* --- 2. Subtle Background Glows (Required for Glass Effect) --- */
-/* These are much darker than before to keep the "Classic Dark" feel */
 body::before {
     content: '';
     position: absolute;
@@ -25,7 +21,7 @@ body::before {
     left: -20%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, #1e1b4b 0%, transparent 70%); /* Deep Indigo */
+    background: radial-gradient(circle, #1e1b4b 0%, transparent 70%);
     filter: blur(80px);
     z-index: -1;
     opacity: 0.8;
@@ -38,13 +34,12 @@ body::after {
     right: -20%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, #312e81 0%, transparent 70%); /* Deep Blue */
+    background: radial-gradient(circle, #312e81 0%, transparent 70%);
     filter: blur(90px);
     z-index: -1;
     opacity: 0.8;
 }
 
-/* --- 3. Headings --- */
 h1 {
     font-size: 2.5rem;
     color: #ffffff;
@@ -52,21 +47,15 @@ h1 {
     text-align: center;
     letter-spacing: 2px;
     text-transform: uppercase;
-    /* A subtle text shadow instead of a border line */
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.1); 
     z-index: 1;
 }
 
-/* --- 4. Dark Glass Card (Menu) --- */
 .button-container {
-    /* Dark semi-transparent background */
     background: rgba(20, 20, 20, 0.6); 
-    backdrop-filter: blur(20px); /* Heavy blur */
+    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    
-    /* Fine frosted border */
     border: 1px solid rgba(255, 255, 255, 0.08); 
-    
     border-radius: 16px;
     padding: 35px;
     width: 100%;
@@ -74,16 +63,14 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Deep shadow */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
 
-/* --- 5. Glassy Buttons --- */
 button {
-    /* Very subtle gradient */
     background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Thin light border */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 16px 20px;
     font-family: inherit;
     font-size: 1rem;
@@ -96,13 +83,12 @@ button {
 }
 
 button:hover {
-    background: rgba(255, 255, 255, 0.1); /* Lighten on hover */
-    border-color: rgba(255, 255, 255, 0.3); /* Brighter border */
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); /* Blue glow */
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
 }
 
-/* --- 6. Attendance Layout --- */
 .list-container {
     width: 100%;
     max-width: 550px;
@@ -112,7 +98,6 @@ button:hover {
     padding-bottom: 70px;
 }
 
-/* --- 7. Student Cards (Dark Glass) --- */
 .student-card {
     background: rgba(20, 20, 20, 0.6); 
     backdrop-filter: blur(15px);
@@ -146,8 +131,8 @@ button:hover {
 }
 
 .student-roll {
-    background: rgba(59, 130, 246, 0.15); /* Dark Blue Badge */
-    color: #60a5fa; /* Light Blue Text */
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -155,7 +140,6 @@ button:hover {
     border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
-/* --- 8. Progress Bars --- */
 .bar-group {
     margin-bottom: 12px;
 }
@@ -165,12 +149,12 @@ button:hover {
     justify-content: space-between;
     font-size: 0.85rem;
     margin-bottom: 6px;
-    color: #a1a1aa; /* Muted Gray */
+    color: #a1a1aa;
 }
 
 .progress-track {
     width: 100%;
-    height: 6px; /* Thinner, sleeker bars */
+    height: 6px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     overflow: hidden;
@@ -179,23 +163,21 @@ button:hover {
 .progress-fill {
     height: 100%;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Inner glow */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* Neon colors for bars against the dark glass */
 .fill-leaves {
-    background: linear-gradient(90deg, #ef4444, #dc2626); /* Red */
+    background: linear-gradient(90deg, #ef4444, #dc2626);
 }
 
 .fill-attend {
-    background: linear-gradient(90deg, #10b981, #059669); /* Emerald Green */
+    background: linear-gradient(90deg, #10b981, #059669);
 }
 
 .fill-attend.low {
-    background: linear-gradient(90deg, #f59e0b, #d97706); /* Amber */
+    background: linear-gradient(90deg, #f59e0b, #d97706);
 }
 
-/* --- 9. Footer --- */
 .footer {
     position: fixed;
     bottom: 0;
@@ -203,7 +185,7 @@ button:hover {
     width: 100%;
     text-align: center;
     padding: 15px;
-    background: linear-gradient(to top, #000000 20%, transparent); /* Fade out */
+    background: linear-gradient(to top, #000000 20%, transparent);
     color: #666;
     font-size: 0.8rem;
     pointer-events: none;
@@ -216,7 +198,6 @@ button:hover {
     pointer-events: auto;
 }
 
-/* --- 10. Images --- */
 .timetable-img {
     width: 100%;
     border-radius: 12px;
@@ -224,7 +205,6 @@ button:hover {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* --- Admin Panel Buttons --- */
 .mini-btn {
     padding: 8px 12px;
     font-size: 0.8rem;
@@ -245,3 +225,287 @@ button:hover {
     color: #38ef7d;
 }
 .mini-btn.green:hover { background: #38ef7d; color: black; }
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-card {
+    background: rgba(20, 20, 20, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 30px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    animation: popIn 0.3s ease;
+}
+
+.modal-card h3 {
+    margin: 0 0 5px 0;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.profile-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.profile-img-small {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #00c6ff;
+}
+
+.profile-img-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.roll-badge {
+    font-size: 0.75rem;
+    color: #aaa;
+    background: rgba(0,0,0,0.3);
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 4px;
+}
+
+.control-section {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.control-section label {
+    font-size: 0.8rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.number-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 15px rgba(255,255,255,0.2);
+    margin: 5px 0 10px 0;
+}
+
+.btn-row {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+    justify-content: center;
+}
+
+.ctrl-btn {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    cursor: pointer;
+    transition: 0.1s;
+    white-space: nowrap;
+}
+
+.ctrl-btn:active { transform: scale(0.95); }
+
+.ctrl-btn.blue { background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; }
+.ctrl-btn.blue:hover { background: #3b82f6; }
+
+.ctrl-btn.green { background: rgba(16, 185, 129, 0.2); border-color: #10b981; }
+.ctrl-btn.green:hover { background: #10b981; }
+
+.ctrl-btn.red { background: rgba(239, 68, 68, 0.2); border-color: #ef4444; }
+.ctrl-btn.red:hover { background: #ef4444; }
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: separate;
+    border-spacing: 8px;
+}
+
+th {
+    color: #60a5fa;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+td {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+}
+
+td:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.day-col {
+    background: linear-gradient(135deg, rgba(0, 198, 255, 0.1), rgba(0, 114, 255, 0.1)) !important;
+    color: #00c6ff !important;
+    font-weight: bold;
+    border: 1px solid rgba(0, 198, 255, 0.2) !important;
+    text-shadow: 0 0 5px rgba(0, 198, 255, 0.5);
+}
+
+.time-small {
+    font-size: 0.6rem;
+    color: #888;
+    font-weight: normal;
+    display: block;
+    margin-top: 4px;
+}
+
+.active-pulse {
+    background: rgba(0, 198, 255, 0.2) !important;
+    color: white !important;
+    border: 1px solid #00c6ff !important;
+    box-shadow: 0 0 20px #00c6ff, inset 0 0 10px #00c6ff !important;
+    transform: scale(1.1) !important;
+    z-index: 10;
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from { box-shadow: 0 0 5px #00c6ff, inset 0 0 5px #00c6ff; }
+    to { box-shadow: 0 0 20px #00c6ff, inset 0 0 10px #00c6ff; }
+}
+
+.active-day-row td {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.status-dashboard {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 198, 255, 0.3);
+    border-radius: 16px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0, 198, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.status-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+.live-badge {
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff4d4d;
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 1px;
+}
+
+.red-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; box-shadow: 0 0 5px #ff0000; }
+    50% { opacity: 0.3; box-shadow: none; }
+    100% { opacity: 1; box-shadow: 0 0 5px #ff0000; }
+}
+
+.digital-clock {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.main-status-text {
+    margin: 0;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.status-active { color: #00c6ff; text-shadow: 0 0 15px #00c6ff; }
+.status-break { color: #f59e0b; text-shadow: 0 0 15px #f59e0b; }
+.status-free { color: #10b981; text-shadow: 0 0 15px #10b981; }

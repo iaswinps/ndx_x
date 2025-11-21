@@ -11,10 +11,27 @@
     <h1>DOWNLOAD SYLLABUS</h1>
 
     <div class="button-container">
-        <button onclick="downloadse()">software engineering</button>
-        <button onclick="downloaddbms()">dbms</button>
-        <button onclick="downloadcl()">cyber laws</button>
-        <button onclick="goHome()" class="back-btn">BACK</button>
+        <button onclick="openOptions('syllabus/BCAS4SoftwareEngineeringSyllabus.pdf', 'SE_Syllabus.pdf')">Software Engineering</button>
+        <button onclick="openOptions('syllabus/BCAS4DataBaseManagementSystem.pdf', 'DBMS_Syllabus.pdf')">DBMS</button>
+        <button onclick="openOptions('syllabus/BCAS4CyberLawsSyllabus.pdf', 'CyberLaws_Syllabus.pdf')">Cyber Laws</button>
+        
+        <button onclick="goHome()" style="margin-top: 20px; background: rgba(255,255,255,0.1);">BACK TO HOME</button>
+    </div>
+
+    <div id="optionModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Select Action</h3>
+            <p id="selectedSubjectText" style="color: #aaa; font-size: 0.9rem; margin-bottom: 20px;">Subject Name</p>
+            
+            <button onclick="viewCurrentFile()" style="background: #3b82f6; margin-bottom: 10px;">👁️ View PDF</button>
+            <button onclick="downloadCurrentFile()" style="background: #10b981; margin-bottom: 10px;">⬇️ Download PDF</button>
+            
+            <button onclick="closeOptions()" style="background: transparent; border: 1px solid #ff416c; color: #ff416c; font-size: 0.8rem; padding: 10px;">Cancel</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>v2.1 • Developed by <a href="https://www.instagram.com/aswinog_" target="_blank"><strong>Aswin</strong></a></p>
     </div>
 
     <script src="script.js"></script>

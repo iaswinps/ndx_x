@@ -3,17 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Table</title>
+    <title>Smart Time Table</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div class="button-container" style="background-color: transparent; box-shadow: none; max-width: 100%;">
-        <img src="TimeTable.png" class="timetable-img" alt="Time Table">
-        <br>
-        <button onclick="goHome()" class="back-btn" style="width: 100%; text-align: center;">BACK TO HOME</button>
+
+    <h1>TIME TABLE</h1>
+
+    <div class="status-dashboard">
+        <div class="status-top-row">
+            <div class="live-badge">
+                <div class="red-dot"></div> LIVE
+            </div>
+            <div id="digitalClock" class="digital-clock">00:00:00</div>
+        </div>
+        
+        <h2 id="currentStatus" class="main-status-text">Loading...</h2>
+        <p id="currentDayText" style="color: #aaa; margin: 0; font-size: 0.9rem;">Checking Schedule...</p>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>1<br><span class="time-small">9:30-10:30</span></th>
+                    <th>2<br><span class="time-small">10:30-11:25</span></th>
+                    <th>3<br><span class="time-small">11:35-12:30</span></th>
+                    <th>4<br><span class="time-small">After Lunch</span></th>
+                    <th>5<br><span class="time-small">Last Hour</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="row-1">
+                    <td class="day-col">MON</td>
+                    <td id="d1-h1">S.E</td>
+                    <td id="d1-h2">C.L</td>
+                    <td id="d1-h3">DBMS</td>
+                    <td id="d1-h4">ENG</td>
+                    <td id="d1-h5">R.B</td>
+                </tr>
+                <tr id="row-2">
+                    <td class="day-col">TUE</td>
+                    <td id="d2-h1">DBMS</td>
+                    <td id="d2-h2">R.B</td>
+                    <td id="d2-h3">PYTHON</td>
+                    <td id="d2-h4">S.E</td>
+                    <td id="d2-h5">C.L</td>
+                </tr>
+                <tr id="row-3">
+                    <td class="day-col">WED</td>
+                    <td id="d3-h1">R.B</td>
+                    <td id="d3-h2">PYTHON</td>
+                    <td id="d3-h3">S.E</td>
+                    <td id="d3-h4">DBMS</td>
+                    <td id="d3-h5">ENG</td>
+                </tr>
+                <tr id="row-4">
+                    <td class="day-col">THU</td>
+                    <td id="d4-h1">PYTHON</td>
+                    <td id="d4-h2">ENG</td>
+                    <td id="d4-h3">S.E</td>
+                    <td id="d4-h4">PYTHON</td>
+                    <td id="d4-h5">DBMS</td>
+                </tr>
+                <tr id="row-5">
+                    <td class="day-col">FRI</td>
+                    <td id="d5-h1">PYTHON</td>
+                    <td id="d5-h2">R.B</td>
+                    <td id="d5-h3">C.L</td>
+                    <td id="d5-h4">DBMS</td>
+                    <td id="d5-h5">FREE</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="button-container" style="margin-top: 20px;">
+        <button onclick="goHome()">BACK TO HOME</button>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        checkTimeTable();
+        setInterval(checkTimeTable, 1000); 
+    </script>
 </body>
 </html>

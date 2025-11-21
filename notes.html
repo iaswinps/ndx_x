@@ -11,13 +11,28 @@
     <h1>DOWNLOAD NOTES</h1>
 
     <div class="button-container">
-        <button onclick="downloadNotesSE()">Software Engineering</button>
-        <button onclick="downloadNotesDBMS()">DBMS</button>
-        <button onclick="downloadNotesCL()">Cyber Laws</button>
+        <button onclick="openOptions('notes/se_notes.pdf', 'SE_Notes.pdf')">Software Engineering</button>
+        <button onclick="openOptions('notes/dbms_notes.pdf', 'DBMS_Notes.pdf')">DBMS</button>
+        <button onclick="openOptions('notes/cl_notes.pdf', 'CyberLaws_Notes.pdf')">Cyber Laws</button>
         
-        <button onclick="goHome()">BACK TO HOME</button>
+        <button onclick="goHome()" style="margin-top: 20px; background: rgba(255,255,255,0.1);">BACK TO HOME</button>
     </div>
 
+    <div id="optionModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Select Action</h3>
+            <p id="selectedSubjectText" style="color: #aaa; font-size: 0.9rem; margin-bottom: 20px;">Subject Name</p>
+            
+            <button onclick="viewCurrentFile()" style="background: #3b82f6; margin-bottom: 10px;">👁️ View PDF</button>
+            <button onclick="downloadCurrentFile()" style="background: #10b981; margin-bottom: 10px;">⬇️ Download PDF</button>
+            
+            <button onclick="closeOptions()" style="background: transparent; border: 1px solid #ff416c; color: #ff416c; font-size: 0.8rem; padding: 10px;">Cancel</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>v2.1 • Developed by <a href="https://instagram.com/aswinog_" target="_blank"><strong>Aswin</strong></a></p>
+    </div>
 
     <script src="script.js"></script>
 </body>

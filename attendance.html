@@ -3,26 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance</title>
+    <title>My Attendance</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>ATTENDANCE</h1>
+    <h1>MY TRACKER</h1>
 
-    <div id="attendance-wrapper" class="list-container">
+    <div class="button-container" style="max-width: 400px; padding: 25px;">
+        
+        <div class="profile-header-bar">
+            <div class="profile-img-small">
+                <img src="cat.png" alt="Profile" onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'">
+            </div>
+            <div class="profile-info">
+                <h2 style="margin: 0; font-size: 1.2rem; color: white;">Scene Payyan</h2>
+                <span class="roll-badge">Roll No: 0</span>
+            </div>
         </div>
 
-    <div class="button-container" style="margin-top: 20px; padding: 20px;">
-        <button onclick="goHome()">BACK TO HOME</button>
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); width: 100%; margin: 15px 0;">
+
+        <div class="control-section">
+            <label>Total Working Days</label>
+            <div class="number-display" id="displayTotal">0</div>
+            <div class="btn-row">
+                <button onclick="updateTotal(-10)" class="ctrl-btn red">-10</button>
+                <button onclick="updateTotal(-1)" class="ctrl-btn red">-1</button>
+                <button onclick="updateTotal(1)" class="ctrl-btn blue">+1</button>
+                <button onclick="updateTotal(10)" class="ctrl-btn blue">+10</button>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <label>Days Present</label>
+            <div class="number-display" id="displayPresent">0</div>
+            
+            <div class="btn-row">
+                <button onclick="updatePresent(-10)" class="ctrl-btn red">-10</button>
+                <button onclick="updatePresent(-1)" class="ctrl-btn red">-1</button>
+                <button onclick="updatePresent(-0.5)" class="ctrl-btn red">-0.5</button>
+                <button onclick="updatePresent(0.5)" class="ctrl-btn green">+0.5</button>
+                <button onclick="updatePresent(1)" class="ctrl-btn green">+1</button>
+                <button onclick="updatePresent(10)" class="ctrl-btn green">+10</button>
+            </div>
+        </div>
+
+        <div class="student-card" style="width: 100%; box-sizing: border-box; margin-top: 10px;">
+            
+            <div class="bar-group">
+                <div class="bar-label">
+                    <span>Leaves</span>
+                    <span id="leavesText">0 Days</span>
+                </div>
+                <div class="progress-track">
+                    <div id="leavesBar" class="progress-fill fill-leaves" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bar-group">
+                <div class="bar-label">
+                    <span>Attendance</span>
+                    <span id="percentText">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div id="percentBar" class="progress-fill fill-attend" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <p id="statusMessage" style="text-align: center; font-size: 0.8rem; margin-top: 10px; color: #aaa;">...</p>
+        </div>
+
+        <button onclick="goHome()" style="margin-top: 20px; width: 100%; background: rgba(255,255,255,0.1);">BACK TO HOME</button>
+    </div>
+
+    <div class="footer">
+        <p>v2.1 • Tracker</p>
     </div>
 
     <script src="script.js"></script>
     <script>
-        // Initialize data if it's the first time opening the site
-        initData();
-        // Then load the display
-        loadAttendance();
+        initPersonalData();
     </script>
 </body>
 </html>
