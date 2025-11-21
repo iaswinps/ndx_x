@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Attendance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>ADMIN PANEL</h1>
+
+    <div class="button-container" style="margin-bottom: 20px; text-align: center;">
+        <h3>TOTAL WORKING DAYS</h3>
+        <h1 id="totalDaysDisplay" style="color: #00c6ff; font-size: 3rem; margin: 10px 0;">0</h1>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button onclick="changeTotalDays(-1)" style="background: #ff416c;">-1 Day</button>
+            <button onclick="changeTotalDays(1)" style="background: #11998e;">+1 Day</button>
+        </div>
+    </div>
+
+    <div id="admin-list" class="list-container">
+        </div>
+
+    <div class="button-container">
+        <button onclick="goHome()">BACK TO HOME</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Load the admin panel data immediately
+        initData(); 
+        renderAdminPanel();
+    </script>
+</body>
+</html>
